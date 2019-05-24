@@ -4,13 +4,11 @@ const table = document.querySelector('table');
 
 table.addEventListener('click', (event) => {
 
-  if (event.target === table.rows[0].cells[0] 
-    || event.target === table.rows[0].cells[1]) {
+  if (event.target.parentNode === table.rows[0]) {
 
     let arr = [];
     for (let i = 1; i < table.rows.length; i++) {
-      arr[i - 1] = 
-      {
+      arr[i - 1] = {
         age: Number(table.rows[i].cells[0].textContent),
         name: table.rows[i].cells[1].textContent,
       }
