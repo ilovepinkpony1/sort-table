@@ -5,13 +5,12 @@ const table = document.querySelector('table');
 table.addEventListener('click', (event) => {
 
   if (event.target.parentNode === table.rows[0]) {
-
     let arr = [];
     for (let i = 1; i < table.rows.length; i++) {
-      arr[i - 1] = {
+      arr.push({
         age: Number(table.rows[i].cells[0].textContent),
         name: table.rows[i].cells[1].textContent,
-      }
+      })
     };
 
     arr.sort((a, b) => {
