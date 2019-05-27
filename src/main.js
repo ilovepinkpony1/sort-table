@@ -1,31 +1,35 @@
 'use strict';
 
-const table = document.querySelector('table');
+window.addEventListener('load', sortTable);
 
-table.addEventListener('click', (event) => {
+function sortTable() {
+const table = document.querySelector('.table');
+const thead = table.querySelector('thead');
+const tbody = table.querySelector('tbody');
 
-  if (event.target.parentNode === table.rows[0]) {
-    let arr = [];
-    for (let i = 1; i < table.rows.length; i++) {
-      arr.push({
-        age: Number(table.rows[i].cells[0].textContent),
-        name: table.rows[i].cells[1].textContent,
-      })
-    };
-
-    arr.sort((a, b) => {
-      if (a.age > b.age) {
-        return 1;
-      }
-      if (a.age < b.age) {
-        return -1;
-      }
-      return 0;
-    });
-    
-    for (let i = 1; i < table.rows.length; i++) {
-      table.rows[i].cells[0].textContent = arr[i - 1].age;
-      table.rows[i].cells[1].textContent = arr[i - 1].name;
-    };   
+thead.addEventListener('click', () => {
+  const arr = [];
+    [...tbody.rows].forEach(tr => {
+    const result =  [...tr.cells].map(td => {
+      return td.innerText;
+    })
+    arr.push(result)
+  })
+  
+  arr.sort((a, b) => {
+    if (Number(a[0]) > Number(b[0])) {
+      return 1;
   }
+    if (Number(a[0]) < Number(b[0])) {
+      return -1;
+  }
+      return 0;
+  });
+
+  [...tbody.rows].forEach((tr, index) => {
+    [...tr.cells].forEach((td, word) => {
+      td.innerText = arr[index][word];
+    })
+  })
 })
+}
