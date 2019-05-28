@@ -8,14 +8,12 @@ function sortTable() {
   const tbody = table.querySelector('tbody');
 
   thead.addEventListener('click', () => {
-    const arr = [];
-      [...tbody.rows].forEach(tr => {
-      const result =  [...tr.cells].map(td => {
+    const arr = [...tbody.rows].map(tr => {
+      return [...tr.cells].map(td => {
         return td.innerText;
       })
-      arr.push(result)
     })
-    
+
     arr.sort((a, b) => {
       if (Number(a[0]) > Number(b[0])) {
         return 1;
@@ -31,5 +29,10 @@ function sortTable() {
         td.innerText = arr[index][word];
       })
     })
+
+
+    
+    console.log(arr);
+    
   })
 }
